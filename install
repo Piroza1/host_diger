@@ -1,0 +1,142 @@
+#include<stdio.h>
+#include<stdlib.h>
+		FILE *fp;
+int a,b,c,d;
+float t;
+char buffer[9999];
+void scan(int a, int b, int c, int d, float t);
+void get();
+int main()
+{
+	
+	int a,b,c,d,e,n;
+
+
+	system("clear");
+	
+
+    printf("╔╗─╔╗─────╔╗╔═══╗\n");
+   
+    printf("║║─║║────╔╝╚╬╗╔╗║\n");
+    printf("║╚═╝╠══╦═╩╗╔╝║║║╠╦══╦══╦══╦═╗\n");
+    printf("║╔═╗║╔╗║══╣║─║║║╠╣╔╗║╔╗║║═╣╔╝\n");
+    
+    printf("║║─║║╚╝╠══║╚╦╝╚╝║║╚╝║╚╝║║═╣║\n");
+    
+    printf("╚╝─╚╩══╩══╩═╩═══╩╩═╗╠═╗╠══╩╝\n");
+    
+    printf("─────────────────╔═╝╠═╝║\n");
+    
+    printf("─────────────────╚══╩══╝");
+    
+    printf("v1.0.1\n");
+    
+    
+
+	printf("\033[1;31mEnter ip range in cidr: \033[0m");
+	scanf("%d.%d.%d.%d/%d",&a,&b,&c,&d,&e);printf("\nEnter connection timeout: ");
+	scanf("%f", &t);
+
+    switch (e)
+    {
+    case 24:
+    	n=255;
+    	d=0;
+	for(d=0;d<=n;d++)
+	{
+	scan(a,b,c,d,t);		
+		}
+		break;
+		
+		case 16:
+	n=2505;
+		for(d=0;d<=n;d++){
+			for(c=0;c<=n;c++){
+	scan(a,b,c,d,t);
+
+	
+	
+			}
+			}
+			break;
+	
+	default:
+	
+
+	   printf("\033[1;31mThat subnet cidr/%d is not yet implemented\n\033[0m",e);
+	return 0;
+    }
+	
+		 if(e==24){
+		 	d=0;
+		 }
+	else if(e==16)
+	{
+	           c=0;
+	           d=0;
+	           }
+	           system("clear");
+	           printf("\033[1;34mScanning results of \033[0m");
+            printf("\033[1;32m%d.%d.%d.%d/%d\033[0m\n\n",a,b,c,d,e);
+           	FILE *pF=fopen("host.txt","r");
+		   		if(pF==NULL){
+		   printf("\033[1;31mNo host was found!\033[0m");
+		   return 0;
+           	} 
+	
+		   				
+		get();
+			system("cat host.txt >> hosts.txt");
+			system("rm host.txt");
+				 printf("\033[1;34mSaved to \033[0m");
+            printf("\033[1;32mhosts.txt\033[0m\n\n");
+			
+					
+			   printf("\033[1;31mScripted by Piroz\033[0m\n");
+			      printf("\033[1;31mTelegram:\033[0m");
+			         printf("\033[1;32m@piroza1\033[0m\n");
+		   		
+	
+		
+	return 0;
+	
+	
+}
+
+
+
+void scan(int a, int b, int c, int d, float t)
+{
+	  char buf[250];        
+	double m=t;
+	snprintf(buf,250,"\ncurl https://%d.%d.%d.%d   --tlsv1.2 --tls-max 1.2 --connect-timeout %.4f -m %.4f -k  -o /dev/null -s  -w \"%%{remote_ip} status:%%{response_code}\\n\" | tee -a ~/host.txt",a,b,c,d,t,m);
+    	system(buf);
+		
+
+}
+
+void get()
+
+{
+	
+	
+	
+	
+	
+	system("sed  -i '/000/d' host.txt");
+	system("sed  -i '/{response_code}/d' host.txt");
+	
+FILE *fp;
+
+		   			FILE *pF=fopen("host.txt","r");
+		   																		   	while(fgets(buffer,9999,pF)!=NULL){
+		   			
+		   			printf("\033[1;32m%s\033[0m\n",buffer);
+		   			   
+	
+		   		}
+	
+		   		
+		   		
+	
+}
